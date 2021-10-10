@@ -1,16 +1,14 @@
 package com.tdd.demo;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 public class TicTacToe {
-    Character[][] board = new Character[9][9];
+    private final Character[][] board = new Character[9][9];
+    private char lastPlayer = 0;
 
     public void play(int x, int y) {
         validateAxis(x);
         validateAxis(y);
         setBox(x, y);
+        lastPlayer = getNextPlayer();
     }
 
     private void setBox(int x, int y) {
@@ -25,5 +23,12 @@ public class TicTacToe {
         if (axis < 0 || axis > 2) {
             throw new InvalidPositionException();
         }
+    }
+
+    public char getNextPlayer() {
+        if (lastPlayer == 'X')
+            return 'O';
+        else
+            return 'X';
     }
 }
